@@ -38,13 +38,15 @@ export default function addLoginEvent() {
  * This function should be used only after the user is logged in
  * @returns {boolean|{headers: {Authorization: string}}}
  */
+
 export function getAuthBearerTokenHeader() {
     const token = localStorage.getItem("access_token");
     return token
         ? {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + `${token}`}
-        : false;
+            'Authorization': 'Bearer ' + `${token}`
+        }
+        : {'Content-Type': 'application/json'};
 }
 
 /**

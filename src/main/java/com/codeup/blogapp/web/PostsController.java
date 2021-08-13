@@ -16,8 +16,8 @@ public class PostsController {
 
         return new ArrayList<Post>() {{
             add(new Post(1L, "A new Post", "I rate it 10 out of 10"));
-            add(new Post(2L, "A new Post", "I rate it 11 out of 10"));
-            add(new Post(3L, "A new Post", "I rate it 12 out of 10"));
+            add(new Post(2L, "A newer Post", "I rate it 11 out of 10"));
+            add(new Post(3L, "A newest Post", "I rate it 12 out of 10"));
         }};
 
     }
@@ -35,13 +35,13 @@ public class PostsController {
     private void createPost(@RequestBody Post obj){
         System.out.println(obj.getTitle());
         System.out.println(obj.getContent());
-        System.out.println(obj.getId());
     }
 
     @PutMapping("{/{id}}")
-    private void updatePost(@PathVariable Long id, @RequestBody Post post){
+private void updatePost(@PathVariable Long id, @RequestBody Post post){
         System.out.println(post.getContent());
     }
+
 
     @DeleteMapping("{id}")
     private void deletePost(@PathVariable Long id){
