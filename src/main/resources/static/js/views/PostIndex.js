@@ -1,11 +1,14 @@
 import fetchData from "../fetchData.js";
-import createView from "../createView";
+import createView from "../createView.js";
+
+
 
 export default function PostIndex(props) {
     return `
         <header>
             <h1>Posts Page</h1>
         </header>
+        
         <main>
 <!--        MAKE CREATE FORM HERE-->
 
@@ -18,8 +21,9 @@ export default function PostIndex(props) {
     <input id="content" name="content" type="text">
     
         <br>
-    <input type="button" name="Submit" id="create-post-btn" value="Submit">
+    <input type="button" name="Submit" id="create-post-btn" value="Add Posts">
 </form>
+
 
 
 <!--//TODO:In the export default function PostIndex, use the current code to add new elements (with the post's content). Test to see if you have additional properties!-->
@@ -82,34 +86,96 @@ export function createPostEvents() {
 
 }
 
-function editPostEvent() {
-    $('.edit-post-btn').click(function () {
+// function editPostEvent() {
+//     $('.edit-post-btn').click(function () {
+//
+//         let post = {
+//             title: $("#title").val(),
+//             content: $("#content").val()
+//         }
+//         console.log(post)
+//
+//         let request = {
+//             method: 'PUT',
+//             headers: {'Content-Type': 'application/json'},
+//             body: JSON.stringify(post)
+//         }
+//
+//         fetchData({
+//                 posts: `/api/posts/${this.attr(`data-id`)}`
+//             },
+//             request).then(res => {
+//             console.log(res.status);
+//             createView("/posts")
+//         }).catch(error => {
+//             console.log(error);
+//             createView("/")
+//         })
+//
+//     });
+
+
+    function editPostEvent (){
+        $(".edit-post-btn").click(function (){
+
+            $(".edit-title, .edit-content").attr("contenteditable",false);
+            $(".edit-post-btn").text("Edit");
+
+            $(this).siblings(".edit-title, .edit-content").attr("contenteditable",true);
+            $(this).text("Save");
+
+            let post = {
+                title: $(this).siblings(".edit-title").text(),
+                content: $(this).siblings(".edit-content").text(),
+            }
+        })
+
+        $(this).off("click",submitEditEvent)
+        let id = $(this).attr("data-id")
+        fetch(`http://localhost:8080/api/posts/${id}`,request)
+            .then(res => {
+            console.log(res.status);
+            createView("/posts")
+        }).catch(error => {
+            console.log(error);
+            createView("/")
+    }
+
+
+
+    function submitEditEvent(){
 
         let post = {
-            title: $("#title").val(),
-            content: $("#content").val()
+            title: $(this).siblings(".edit-title").text(),
+            content: $(this).siblings(".edit-content").text(),
         }
-        console.log(post)
 
         let request = {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(post)
         }
+    }
 
-        fetchData({
-                posts: `/api/posts/${this.attr(`data-id`)}`
-            },
-            request).then(res => {
-            console.log(res.status);
-            createView("/posts")
-        }).catch(error => {
-            console.log(error);
-            createView("/")
-        })
+        function deleteEvent(){
+            $(".delete-btn").click(function (){
 
-    });
+                let request = {
+                    method: "DELETE",
+                    headers: {"Content-Type": "application/json"},
+                }
 
+                fetch(`http://localhost:8080/api/posts/${id}`, request)
+                    .then(res => {
+                        console.log(res.status);
+                        createView("/posts");
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        createView("/posts")
+                    })
+            })
+        }
 }
 
 
