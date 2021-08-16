@@ -1,4 +1,5 @@
 import fetchData from "../fetchData.js";
+import createView from "../createView";
 
 export default function PostIndex(props) {
     return `
@@ -20,10 +21,9 @@ export default function PostIndex(props) {
     <input type="button" name="Submit" id="create-post-btn" value="Submit">
 </form>
 
-<!--delete button-->
 
-<!--add edit button, -->
-
+<!--//TODO:In the export default function PostIndex, use the current code to add new elements (with the post's content). Test to see if you have additional properties!-->
+ 
 <br>
             
             <div>
@@ -33,9 +33,14 @@ export default function PostIndex(props) {
 
 <h2>${post.content}</h2>
 
-<!--edit form -->
-    <input type="button" data-id="${post.id}" class="edit-post-btn" value="Submit">
+<!--//TODO: In PostIndex, above where your posts are rendered but inside the html, add a form for creating a new post-->
 
+
+<!--edit button, -->
+    <input type="button" data-id="${post.id}" class="edit-post-btn" value="Edit">
+    
+    <!--delete button-->
+    <input type="button" data-id="${post.id}" class="delete-post-btn" value="Delete">
 
 `)
         .join('')}   
@@ -46,7 +51,8 @@ export default function PostIndex(props) {
 }
 
 PostEvent()
-export function PostEvent(){
+
+export function PostEvent() {
     createPostEvents()
     editPostEvent()
 }
@@ -76,7 +82,7 @@ export function createPostEvents() {
 
 }
 
-function editPostEvent(){
+function editPostEvent() {
     $('.edit-post-btn').click(function () {
 
         let post = {
@@ -94,7 +100,13 @@ function editPostEvent(){
         fetchData({
                 posts: `/api/posts/${this.attr(`data-id`)}`
             },
-            request)
+            request).then(res => {
+            console.log(res.status);
+            createView("/posts")
+        }).catch(error => {
+            console.log(error);
+            createView("/")
+        })
 
     });
 

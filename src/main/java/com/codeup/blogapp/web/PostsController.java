@@ -15,9 +15,9 @@ public class PostsController {
     public List<Post> getPosts() {
 
         return new ArrayList<Post>() {{
-            add(new Post(1L, "A new Post", "I rate it 10 out of 10"));
-            add(new Post(2L, "A newer Post", "I rate it 11 out of 10"));
-            add(new Post(3L, "A newest Post", "I rate it 12 out of 10"));
+            add(new Post(1L, "Harry Potter", "A wizard doing stuff"));
+            add(new Post(2L, "Spider-man", "A spiderman turned into a man"));
+            add(new Post(3L, "Aqua-lad", "Half fish Half lamp"));
         }};
 
     }
