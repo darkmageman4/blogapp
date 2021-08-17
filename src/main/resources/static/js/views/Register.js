@@ -1,4 +1,4 @@
-import createView from "../createView";
+import createView from "../createView.JS";
 
 export default function Register(props) {
     return `<!DOCTYPE html>
@@ -17,43 +17,60 @@ export default function Register(props) {
     <input  id="username" name="username" type="text"/>
     <label for="password">Password</label>
     <input id="password" name="password" type="password"/>
-    <input id="register-btn" type="submit" value="Log In"/>
+  <button id="register-btn" type="button" >Register</button>
 </form>
 </body>
 </html>`;
 
-    const routes = {
-        // ...additional routes
 
-        '/login': {
-            returnView: Register,
-            state: {},
-            uri: '/register',
-            title: "Register",
-            viewEvent : RegisterEvent
-        }
-    }
+//    export function RegisterEvent() {
+//         document.querySelector("#register-btn").addEventListener("click", function () {
+//             let obj = {
+//                 username: document.querySelector("#username").value,
+//                 password: document.querySelector("#password").value,
+//                 email: document.querySelector("#email").value,
+//                 grant_type: 'password'
+//             }
+//
+//             let request = {
+//                 method: "POST",
+//                 headers: {"Content-Type": "application/json"},
+//                 body: `grant_type=${obj.grant_type}&username=${obj.username}&password=${obj.password}&email=${obj.email}&client_id=rest-blog-client`
+//             };
+//
+//             fetch("http://localhost:8080/api/users", request)
+//                 .then((response) => {
+//                     console.log(response.status)
+//                     createView("/");
+//                 });
+//         });
+//     }
+// }
 
-    function RegisterEvent(){
-        document.querySelector("#register-btn").addEventListener("click", function () {
-            let obj = {
-                username: document.querySelector("#username").value,
-                password: document.querySelector("#password").value,
-                email: document.querySelector("#email").value,
-                grant_type: 'password'
+    function RegisterEvent() {
+        $("#register-btn").click(function () {
+            let user = {
+                username: $("#username").val(),
+                password: $("#password").val(),
+                email: $("#email").val()
             }
+            let request = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(user)
+            }
+            console.log(request)
 
-       let request = { method: "POST",
-            headers: {"Content-Type": "application/json"},
-        body: **YOUR USER OBJECT**
-    };
-
-    fetch("http://localhost:8080/api/users", request)
-        .then((response) => {
-            console.log(response.status)
-            createView("/");
-        });
+            fetch("http://localhost:8080/api/users", request).then((response) => {
+                console.log(response.status)
+                createView("/")
+            })
+        })
     }
 }
+
+
 
 
