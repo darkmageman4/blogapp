@@ -115,47 +115,45 @@ export function createPostEvents() {
 //     });
 
 
-    function editPostEvent (){
-        $(".edit-post-btn").click(function (){
+function editPostEvent() {
+    $(".edit-post-btn").click(function () {
+        console.log("event fired off")
+        $(".edit-post-btn").text("Edit");
+        $(".edit-title, .edit-content").attr("readonly", true);
+        $(this).siblings(".edit-title, .edit-content").attr("readonly", false);
+        $(this).text("Save");
 
-            $(".edit-title, .edit-content").attr("contenteditable",false);
-            $(".edit-post-btn").text("Edit");
+        $(this).on("click", submitEditEvent)
 
-            $(this).siblings(".edit-title, .edit-content").attr("contenteditable",true);
-            $(this).text("Save");
+    })
+}
 
-            let post = {
-                title: $(this).siblings(".edit-title").text(),
-                content: $(this).siblings(".edit-content").text(),
-            }
-        })
+function submitEditEvent() {
+    let post = {
+        title: $(this).siblings("edit-title").text(),
+        content: $(this).siblings("edit-content").text()
+    }
+    let request = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
 
-        $(this).off("click",submitEditEvent)
-        let id = $(this).attr("data-id")
-        fetch(`http://localhost:8080/api/posts/${id}`,request)
-            .then(res => {
+        },
+        body: JSON.stringify(post)
+    }
+
+    console.log(post)
+
+    $(this).off("click", submitEditEvent)
+    let id = $(this).attr("data-id")
+    fetch(`http://localhost:8080/api/posts/${id}`, request)
+        .then(res => {
             console.log(res.status);
-            createView("/posts")
+            createView("/posts");
         }).catch(error => {
-            console.log(error);
-            createView("/")
-    }
-
-
-
-    function submitEditEvent(){
-
-        let post = {
-            title: $(this).siblings(".edit-title").text(),
-            content: $(this).siblings(".edit-content").text(),
-        }
-
-        let request = {
-            method: 'PUT',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(post)
-        }
-    }
+        console.log(error);
+        createPostEvents("/posts")
+    })
 
         function deleteEvent(){
             $(".delete-btn").click(function (){

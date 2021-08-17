@@ -26,6 +26,7 @@ export default function router(URI) {
             title: "Login",
             viewEvent: LoginEvent
         },
+
         '/posts': {
             returnView: PostIndex,
             state: {
