@@ -26,9 +26,7 @@ public class User {
         this.posts = posts;
 
     }
-    public User (String Username){
-
-    }
+    public User (String Username){}
 
     public long getId() {
         return id;
