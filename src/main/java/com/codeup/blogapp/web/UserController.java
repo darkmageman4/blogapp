@@ -15,6 +15,8 @@ public class UserController {
     @GetMapping
     public List<User> getUsers() {
 
+        User user = new User(1L, "Wagner", "wag@codeup.com", "password", User.Role.ADMIN);
+
         return new ArrayList<>() {{
             add(new User(1L, "Wagner", "wag@codeup.com", "password", User.Role.ADMIN));
                     add(new User(2L, "Russ", "rus@codeup.com", "password", User.Role.USER));
@@ -53,23 +55,24 @@ private User getUserById(@PathVariable Long id){
 
     @GetMapping("{id}")
     private User findById(@PathVariable Long id){
-        User user = getUsers().stream()
+        return getUsers().stream()
                 .filter(t -> id.equals(t.getId())).findFirst().orElse(null);
-        return user;
     }
 
     @GetMapping("/findByUsername")
     private User findByUsername(@PathVariable String username){
-        User user = getUsers().stream()
+        return getUsers().stream()
                 .filter(t -> username.equals(t.getUsername())).findFirst().orElse(null);
-        return user;
     }
 
     @GetMapping("/findByEmail")
     private User findByEmail(@RequestParam String email){
-        User user = getUsers().stream()
-                .filter(t -> email.equals(t.getEmail())).findFirst().orElse(null);
-        return user;
+//        return getUsers().stream()
+//                .filter(t -> email.equals(t.getEmail())).findFirst().orElse(null);
+return
+getUsers().stream().filter(t -> email.equals(t.getEmail())).findFirst().orElse(null);
+
+
     }
 
     @GetMapping("{id}/updatePassword")

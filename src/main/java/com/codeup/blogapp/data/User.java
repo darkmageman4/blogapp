@@ -1,6 +1,7 @@
 package com.codeup.blogapp.data;
 
 
+import java.util.Collection;
 import java.util.Date;
 
 public class User {
@@ -11,6 +12,7 @@ public class User {
     private String email;
     private String password;
     private Role role = Role.USER;
+    private Collection<Post> posts;
 
     public enum Role {USER, ADMIN}
 
@@ -21,6 +23,10 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.posts = posts;
+
+    }
+    public User (String Username){
 
     }
 
