@@ -53,24 +53,28 @@ private User getUserById(@PathVariable Long id){
         System.out.println("Deleting user with id " + getUserById(id));
     }
 
-    @GetMapping("{id}")
-    private User findById(@PathVariable Long id){
-        return getUsers().stream()
-                .filter(t -> id.equals(t.getId())).findFirst().orElse(null);
-    }
+//    @GetMapping("{id}")
+//    private User findById(@PathVariable Long id){
+////        return getUsers().stream()
+////                .filter(t -> id.equals(t.getId())).findFirst().orElse(null);
+//        System.out.println(id);
+//        return null;
+//    }
 
     @GetMapping("/findByUsername")
     private User findByUsername(@PathVariable String username){
-        return getUsers().stream()
-                .filter(t -> username.equals(t.getUsername())).findFirst().orElse(null);
+//        return getUsers().stream()
+//                .filter(t -> username.equals(t.getUsername())).findFirst().orElse(null);
+        System.out.println(username);
+        return null;
     }
 
     @GetMapping("/findByEmail")
     private User findByEmail(@RequestParam String email){
 //        return getUsers().stream()
 //                .filter(t -> email.equals(t.getEmail())).findFirst().orElse(null);
-return
-getUsers().stream().filter(t -> email.equals(t.getEmail())).findFirst().orElse(null);
+        System.out.println(email);
+        return null;
 
 
     }

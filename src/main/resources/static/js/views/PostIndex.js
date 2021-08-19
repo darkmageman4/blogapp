@@ -1,4 +1,3 @@
-import fetchData from "../fetchData.js";
 import createView from "../createView.js";
 
 export default function PostIndex(props) {
@@ -29,11 +28,15 @@ export default function PostIndex(props) {
                         
                         <input class="edit-title" value="${post.title}" readonly>
                         <input class="edit-content"  value="${post.content}" readonly>
-                       
+                        <h2 class="username">${post.user.username}</h2>
+                        ${post.categories.map(categories => `
+                        <h4 class="categories">${categories.name}</h4>
+
+`)}            
                     
                         <button  class="edit-post-btn" type="button" data-id="${post.id}">Edit</button>
                      
-                        <button data-id=${post.id} class="delete-post-btn">Delete</button>
+                        <button data-id="${post.id}" class="delete-post-btn">Delete</button>
                         </div>
        <!--add edit, delete buttons, add edit form-->
         
