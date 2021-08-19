@@ -4,23 +4,33 @@ import java.util.Collection;
 
 public class Category {
 
-    private Long id;
+    private long id;
     private String name;
     private Collection<Post> posts;
 
-    public Category() {
+    public Collection<Post> getPosts() {
+        return posts;
     }
 
-    public Category(Long id, String name) {
+    public void setPosts(Collection<Post> posts) {
+        this.posts = posts;
+    }
+
+    public Category(Collection<Post> posts, String name) {
+        this.posts = posts;
+        this.name = name;
+    }
+
+    public Category(long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -3,12 +3,16 @@ package com.codeup.blogapp.data;
 import java.util.Collection;
 
 public class Post {
-
     private Long id;
     private String title;
     private String content;
     private User user;
     private Collection<Category> categories;
+
+
+    public Post(Collection<Category> categories) {
+        this.categories = categories;
+    }
 
     public Post(Long id, String title, String content, User user) {
         this.id = id;
@@ -17,12 +21,22 @@ public class Post {
         this.user = user;
     }
 
-    public Post(String title, String content){
-        this.title = title;
-        this.content = content;
+
+    public Collection<Category> getCategories() {
+        return categories;
     }
 
-    public Post(){}
+    public void setCategories(Collection<Category> categories) {
+        this.categories = categories;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Long getId() {
         return id;
@@ -48,15 +62,4 @@ public class Post {
         this.content = content;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Post(Collection<Category> categories) {
-        this.categories = categories;
-    }
 }

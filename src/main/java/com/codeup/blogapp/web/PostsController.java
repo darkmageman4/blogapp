@@ -15,12 +15,12 @@ public class PostsController {
     @GetMapping
     public List<Post> getPosts() {
 
-        User user = new User(1L,"testy","test@test.com","password", User.Role.USER);
+        User user = new User(1L,"testy","test@test.com","password",null);
 
         return new ArrayList<Post>() {{
-            add(new Post(1L, "Harry Potter", "A wizard doing stuff"));
-            add(new Post(2L, "Spider-man", "A spiderman turned into a man"));
-            add(new Post(3L, "Aqua-lad", "Half fish Half lamp"));
+            add(new Post(1L, "Harry Potter", "A wizard doing stuff",null));
+            add(new Post(2L, "Spider-man", "A spiderman turned into a man",null));
+            add(new Post(3L, "Aqua-lad", "Half fish Half lamp",null));
         }};
 
     }
@@ -28,11 +28,11 @@ public class PostsController {
     @GetMapping("{id}")
     private Post getPostById(@PathVariable Long id) {
 
-        User user = new User(1L,"testy","test@test.com","password", User.Role.USER);
+        User user = new User(1L,"testy","test@test.com","password",null);
 
 
         if (id == 1) {
-            return new Post(1L, "A new Post", "I rate it 10 out of 10");
+            return new Post(1L, "A new Post", "I rate it 10 out of 10",null);
         } else {
             return null;
         }

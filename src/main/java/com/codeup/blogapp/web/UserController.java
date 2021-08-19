@@ -15,19 +15,19 @@ public class UserController {
     @GetMapping
     public List<User> getUsers() {
 
-        User user = new User(1L, "Wagner", "wag@codeup.com", "password", User.Role.ADMIN);
+        User user = new User(1L, "Wagner", "wag@codeup.com", "password",null);
 
         return new ArrayList<>() {{
-            add(new User(1L, "Wagner", "wag@codeup.com", "password", User.Role.ADMIN));
-                    add(new User(2L, "Russ", "rus@codeup.com", "password", User.Role.USER));
-                    add(new User(3L, "Charles", "char@codeup.com", "password", User.Role.USER));
+            add(new User(1L, "Wagner", "wag@codeup.com", "password", null));
+                    add(new User(2L, "Russ", "rus@codeup.com", "password", null));
+                    add(new User(3L, "Charles", "char@codeup.com", "password", null));
         }};
     }
 
     @GetMapping("{id}")
 private User getUserById(@PathVariable Long id){
         if (id == 1) {
-            return new User(1L, "Wagner", "wag@codeup.com", "password", User.Role.USER);
+            return new User(1L, "Wagner", "wag@codeup.com", "password", null);
         }else{
             return null;
         }
