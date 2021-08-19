@@ -29,7 +29,7 @@ export default function PostIndex(props) {
                         <input class="edit-title" value="${post.title}" readonly>
                         <input class="edit-content"  value="${post.content}" readonly>
                         <h2 class="username">${post.user.username}</h2>
-                        ${post.categories.map(categories => `
+                        ${post.category.map(categories => `
                         <h4 class="categories">${categories.name}</h4>
 
 `)}            
@@ -93,6 +93,9 @@ function createPostEvent() {
 
 }
 
+function getPostcomponents(){
+
+}
 
 function editEvent() {
     $(".edit-post-btn").click(function () {

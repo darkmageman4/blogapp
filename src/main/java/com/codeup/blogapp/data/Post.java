@@ -19,6 +19,7 @@ public class Post {
         this.title = title;
         this.content = content;
         this.user = user;
+//        this.categories = categories;
     }
 
 
