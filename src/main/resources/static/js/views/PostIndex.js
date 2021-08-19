@@ -12,42 +12,49 @@ export default function PostIndex(props) {
     <label for="title">Title</label>
     <input id="title" name="title" type="text">
     <br>
-
+${props.categories.map(category => `<option>${category.name}</option>`)}
     <label for="content">Content</label>
     <input id="content" name="content" type="content">
     <br>
 
     <input type="button" id="create-post-btn" value="Add-Post">
 </form>
-            
-            <div class="post-container">
-                ${props.posts.map(post =>
-        `
-                     
-                        <div>
-                        
-                        <input class="edit-title" value="${post.title}" readonly>
-                        <input class="edit-content"  value="${post.content}" readonly>
-                        <h2 class="username">${post.user.username}</h2>
-                        ${post.category.map(categories => `
-                        <h4 class="categories">${categories.name}</h4>
 
-`)}            
-                    
-                        <button  class="edit-post-btn" type="button" data-id="${post.id}">Edit</button>
-                     
-                        <button data-id="${post.id}" class="delete-post-btn">Delete</button>
-                        </div>
-       <!--add edit, delete buttons, add edit form-->
-        
-        
-        `).join('')}   
-            </div>
-            
+
+                                                ${getPostsComponent(props.posts)}
+
             
         </main>
     `;
 }
+
+function getPostsComponent(posts){
+    return posts.map(post =>`
+               <div class="post">
+               
+                   <h3 class="edit-title">${post.title}</h3>
+                    <h2 class="edit-content">${post.content}</h2>
+                    <h2 class="username">Posted By: ${post.user.username}</h2>
+                    <div class="categories">
+                    ${getCategoriesComponent(post.categories)}
+                    <button type="button" class="edit" data-id=${post.id}>Edit</button>
+                        <button type="button" class="delete" data-id=${post.id}>Delete</button>
+                    
+                 </div>`
+    ).join('')
+};
+
+
+function getCategoriesComponent(categories){
+
+    console.log(categories);
+    return categories.map(category => {
+        return`
+        <span>#${category.name}</span>
+        `
+    }).join('')
+}
+
 
 
 export function PostsEvent() {
@@ -93,7 +100,7 @@ function createPostEvent() {
 
 }
 
-function getPostcomponents(){
+function getPostcomponents() {
 
 }
 

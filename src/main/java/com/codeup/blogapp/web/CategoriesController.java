@@ -24,12 +24,17 @@ public class CategoriesController {
     @GetMapping
     private Category getPostsByCategory(@RequestParam String categoryName){
 
-        Category Categories = new Category(4L, "fozeball");
+        Category categories = new Category(4L, "snowcone");
 
-        Categories.setPosts(userPosts);
+        categories.setPosts(userPosts);
 
         System.out.println(categoryName);
 
+        return categories;
+    }
+
+    private List<Category> getCategories(){
         return Categories;
     }
+
 }
