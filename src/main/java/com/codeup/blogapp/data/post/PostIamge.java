@@ -15,4 +15,12 @@ public class PostIamge {
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
+
+    public PostIamge(Long id, String path, Post post) {
+        this.id = id;
+        this.path = path;
+        this.post = post;
+    }
+
+    public PostIamge(){}
 }

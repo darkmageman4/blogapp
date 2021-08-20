@@ -33,8 +33,5 @@ public class CategoriesController {
         return categories;
     }
 
-    private List<Category> getCategories(){
-        return Categories;
-    }
 
 }

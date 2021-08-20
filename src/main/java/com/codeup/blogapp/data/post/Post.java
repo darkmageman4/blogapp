@@ -32,12 +32,7 @@ public class Post {
     private Collection<Category> categories;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
-    private List<PostImage> images;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "post_category",
-            joinColumns = {@JoinColumn(name = "category_id")})
-    private List<PostCategory> categories;
+    private List<PostIamge> images;
 
 
     public Post(Collection<Category> categories) {

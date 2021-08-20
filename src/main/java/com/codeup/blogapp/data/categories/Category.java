@@ -19,8 +19,6 @@ public class Category {
     @ManyToMany(mappedBy = "categories")
     private Collection<Post> posts;
 
-    @ManyToMany(mappedBy = "categories")
-    private List<Post> posts;
 
     public Category() {}
 

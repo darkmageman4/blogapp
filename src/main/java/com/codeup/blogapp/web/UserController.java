@@ -20,28 +20,7 @@ public class UserController {
 
     @GetMapping
     public List<User> getUsers() {
-
-//        User user = new User(1L, "Wagner", "wag@codeup.com", "password",null);
-//
-//        return new ArrayList<>() {{
-//            add(new User(1L, "Wagner", "wag@codeup.com", "password", null));
-//                    add(new User(2L, "Russ", "rus@codeup.com", "password", null));
-//                    add(new User(3L, "Charles", "char@codeup.com", "password", null));
-//        }};
-
         return userRepository.findAll();
-
-    }
-
-    @GetMapping("{id}")
-private User getUserById(@PathVariable Long id){
-//        if (id == 1) {
-//            return new User(1L, "Wagner", "wag@codeup.com", "password", null);
-//        }else{
-//            return null;
-//        }
-
-        return userRepository.getById(id);
     }
 
     @PostMapping
@@ -60,15 +39,15 @@ private User getUserById(@PathVariable Long id){
         userRepository.save(user);
     }
 
-    @DeleteMapping
+    @DeleteMapping("{id}")
     private void deleteUser(@PathVariable Long id){
-        System.out.println("Deleting user with id " + getUserById(id));
+        System.out.println("Deleting user with id " + id);
        userRepository.deleteById(id);
     }
 
     @GetMapping("{id}")
     private User findById(@PathVariable Long id){
-       userRepository.findById(id);
+      return userRepository.getById(id);
     }
 
     @GetMapping("/findByUsername")
@@ -84,7 +63,6 @@ return userRepository.findByUsername(username);
     @GetMapping("{id}/updatePassword")
     private void updatePassword(@PathVariable Long id, @RequestParam(required = false) String oldPassword, @Valid @Size(min = 3) @RequestParam String newPassword
     ){
-
     }
 
 }
