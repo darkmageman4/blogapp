@@ -1,13 +1,28 @@
 package com.codeup.blogapp.data;
 
+import javax.persistence.*;
 import java.util.Collection;
 
+@Entity
+@Table(name = "posts")
 public class Post {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+@Column(nullable = false, length = 100)
     private String title;
+
+@Column(nullable = false)
     private String content;
+
+@OneToOne
     private User user;
     private Collection<Category> categories;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    private List<PostImage> images;
 
 
     public Post(Collection<Category> categories) {
