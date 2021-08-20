@@ -1,9 +1,10 @@
-package com.codeup.blogapp.data;
+package com.codeup.blogapp.data.user;
+
+import com.codeup.blogapp.data.post.Post;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.util.Collection;
-import java.util.Date;
 
 @Entity
 @Table(name="users")
@@ -27,7 +28,7 @@ public class User {
     @Column(nullable = false)
     private Role role = Role.USER;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id")
     private Collection<Post> posts;
 
 

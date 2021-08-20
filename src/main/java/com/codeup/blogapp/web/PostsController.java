@@ -1,67 +1,51 @@
 package com.codeup.blogapp.web;
 
-import com.codeup.blogapp.data.Category;
-import com.codeup.blogapp.data.Post;
-import com.codeup.blogapp.data.User;
+import com.codeup.blogapp.data.post.Post;
+import com.codeup.blogapp.data.post.PostsRepository;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/posts", headers = "Accept=application/json")
 public class PostsController {
 
-User user = new User("tasty");
-List<Category>categories = new ArrayList<>(){{
-    add(new Category(1L,"Spring boot"));
-    add(new Category(1L,"Why JV "));
+    private final PostsRepository postsRepository;
 
-}};
+    public PostsController(PostsRepository postsRepository) {
+        this.postsRepository = postsRepository;
+    }
+
     @GetMapping
     public List<Post> getPosts() {
-
-        User user = new User(1L,"testy","test@test.com","password",null);
-
-        return new ArrayList<Post>() {{
-            add(new Post(1L, "Harry Potter", "A wizard doing stuff",user));
-            add(new Post(2L, "Spider-man", "A spiderman turned into a man",user));
-            add(new Post(3L, "Aqua-lad", "Half fish Half lamp",user));
-        }};
-
+        return postsRepository.findAll();
     }
 
     @GetMapping("{id}")
     private Post getPostById(@PathVariable Long id) {
-
-        User user = new User(1L,"testy","test@test.com","password",null);
-
-
-        if (id == 1) {
-            return new Post(1L, "A new Post", "I rate it 10 out of 10",null);
-        } else {
-            return null;
-        }
-
+        return postsRepository.getById(id);
     }
 
     @PostMapping
-    private void createPost(@RequestBody Post obj){
-        System.out.println(obj.getTitle());
-        System.out.println(obj.getContent());
+    private void createPost(@RequestBody Post newPosts) {
+        System.out.println(newPosts.getTitle());
+        System.out.println(newPosts.getContent());
+        postsRepository.save(newPosts);
     }
 
     @PutMapping("{/{id}}")
-private void updatePost(@PathVariable Long id, @RequestBody Post post){
-        System.out.println(post.getContent());
-        System.out.println(id);
-        System.out.println(post);
+    private void updatePost(@PathVariable Long id, @RequestBody Post postToUpdate) {
+        System.out.println(postToUpdate.getContent());
+        System.out.println("Updating post with id: " + id);
+        System.out.println(postToUpdate);
+        postsRepository.save(postToUpdate);
     }
 
 
     @DeleteMapping("{id}")
-    private void deletePost(@PathVariable Long id){
-        System.out.println();
+    private void deletePost(@PathVariable Long id) {
+        System.out.println("Delete post with id: " + id);
+        postsRepository.deleteById(id);
     }
 
 

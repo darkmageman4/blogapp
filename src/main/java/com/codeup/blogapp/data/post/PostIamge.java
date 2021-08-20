@@ -1,7 +1,5 @@
 package com.codeup.blogapp.data.post;
 
-import com.codeup.blogapp.data.Post;
-
 import javax.persistence.*;
 
 @Entity
