@@ -2,6 +2,7 @@ package com.codeup.blogapp.data;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "posts")
@@ -11,18 +12,29 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-@Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 100)
     private String title;
 
-@Column(nullable = false)
+    @Column(nullable = false)
     private String content;
 
-@OneToOne
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "post_category",
+            joinColumns = {@JoinColumn(name = "post_id")},
+            inverseJoinColumns = {@JoinColumn(name = "category_id")})
     private Collection<Category> categories;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private List<PostImage> images;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "post_category",
+            joinColumns = {@JoinColumn(name = "category_id")})
+    private List<PostCategory> categories;
 
 
     public Post(Collection<Category> categories) {
@@ -34,9 +46,9 @@ public class Post {
         this.title = title;
         this.content = content;
         this.user = user;
-//        this.categories = categories;
     }
 
+    public Post() {}
 
     public Collection<Category> getCategories() {
         return categories;
