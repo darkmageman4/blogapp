@@ -17,13 +17,12 @@ public class PostsController {
     }
 
     @GetMapping
-    public List<Post> getPosts() {
-        return postsRepository.findAll();
-    }
+    public List<Post> getPosts() {return postsRepository.findAll(); }
 
     @GetMapping("{id}")
     private Post getPostById(@PathVariable Long id) {
-        return postsRepository.getById(id);
+//        return postsRepository.getById(id);
+        return postsRepository.findById(id).get();
     }
 
     @PostMapping

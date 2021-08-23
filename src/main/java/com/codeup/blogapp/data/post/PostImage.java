@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="post_images")
-public class PostIamge {
+public class PostImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,11 +16,11 @@ public class PostIamge {
     @JoinColumn(name = "post_id")
     private Post post;
 
-    public PostIamge(Long id, String path, Post post) {
+    public PostImage(Long id, String path, Post post) {
         this.id = id;
         this.path = path;
         this.post = post;
     }
 
-    public PostIamge(){}
+    public PostImage(){}
 }

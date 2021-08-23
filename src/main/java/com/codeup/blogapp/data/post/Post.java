@@ -2,6 +2,9 @@ package com.codeup.blogapp.data.post;
 
 import com.codeup.blogapp.data.categories.Category;
 import com.codeup.blogapp.data.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -22,17 +25,15 @@ public class Post {
     private String content;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
 
     @ManyToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
     @JoinTable(name = "post_category",
             joinColumns = {@JoinColumn(name = "post_id")},
             inverseJoinColumns = {@JoinColumn(name = "category_id")})
     private Collection<Category> categories;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
-    private List<PostIamge> images;
 
 
     public Post(Collection<Category> categories) {

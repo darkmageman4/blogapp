@@ -9,6 +9,7 @@ import java.util.List;
 @Entity
 @Table(name = "categories")
 public class Category {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -19,17 +20,9 @@ public class Category {
     @ManyToMany(mappedBy = "categories")
     private Collection<Post> posts;
 
-
     public Category() {}
 
 
-    public Collection<Post> getPosts() {
-        return posts;
-    }
-
-    public void setPosts(Collection<Post> posts) {
-        this.posts = posts;
-    }
 
     public Category(Collection<Post> posts, String name) {
         this.posts = posts;
@@ -39,6 +32,14 @@ public class Category {
     public Category(long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Collection<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(Collection<Post> posts) {
+        this.posts = posts;
     }
 
     public long getId() {

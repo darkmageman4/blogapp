@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/users", headers = "Accept=application/json")
+@RequestMapping(value = "/api/users", headers = "Accept=application/json",produces = "application/json")
 public class UserController {
 
     private final UserRepository userRepository;
@@ -60,7 +60,7 @@ return userRepository.findByUsername(username);
         return userRepository.findByEmail(email);
     }
 
-    @GetMapping("{id}/updatePassword")
+    @PutMapping ("{id}/updatePassword")
     private void updatePassword(@PathVariable Long id, @RequestParam(required = false) String oldPassword, @Valid @Size(min = 3) @RequestParam String newPassword
     ){
     }
