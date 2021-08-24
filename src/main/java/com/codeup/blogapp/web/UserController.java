@@ -51,7 +51,7 @@ public class UserController {
     }
 
     @GetMapping("/findByUsername")
-    private User findByUsername(@PathVariable String username){
+    private User findByUsername(@RequestParam String username){
 return userRepository.findByUsername(username);
     }
 
