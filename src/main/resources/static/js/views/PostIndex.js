@@ -12,18 +12,14 @@ export default function PostIndex(props) {
     <label for="title">Title</label>
     <input id="title" name="title" type="text">
     <br>
-${props.categories.map(category => `<option>${category.name}</option>`)}
+${props.category.map(category => `<option>${category.name}</option>`)}
     <label for="content">Content</label>
     <input id="content" name="content" type="content">
     <br>
 
     <input type="button" id="create-post-btn" value="Add-Post">
 </form>
-
-
-                                                ${getPostsComponent(props.posts)}
-
-            
+                                                ${getPostsComponent(props.posts)}     
         </main>
     `;
 }
@@ -42,14 +38,14 @@ function getPostsComponent(posts){
                     
                  </div>`
     ).join('')
-};
+}
 
 
 function getCategoriesComponent(categories){
 
     console.log(categories);
     return categories.map(category => {
-        return`
+        `
         <span>#${category.name}</span>
         `
     }).join('')

@@ -2,6 +2,7 @@ package com.codeup.blogapp.web;
 
 import com.codeup.blogapp.data.post.Post;
 import com.codeup.blogapp.data.post.PostsRepository;
+import com.codeup.blogapp.services.EmailService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,9 +11,13 @@ import java.util.List;
 @RequestMapping(value = "/api/posts", headers = "Accept=application/json")
 public class PostsController {
 
+    private final EmailService emailService;
+
+
     private final PostsRepository postsRepository;
 
-    public PostsController(PostsRepository postsRepository) {
+    public PostsController(EmailService emailService, PostsRepository postsRepository) {
+        this.emailService = emailService;
         this.postsRepository = postsRepository;
     }
 
@@ -21,7 +26,6 @@ public class PostsController {
 
     @GetMapping("{id}")
     private Post getPostById(@PathVariable Long id) {
-//        return postsRepository.getById(id);
         return postsRepository.findById(id).get();
     }
 
@@ -30,6 +34,7 @@ public class PostsController {
         System.out.println(newPosts.getTitle());
         System.out.println(newPosts.getContent());
         postsRepository.save(newPosts);
+        emailService.prepareAndSend(newPosts, "test", "the is new post");
     }
 
     @PutMapping("{/{id}}")

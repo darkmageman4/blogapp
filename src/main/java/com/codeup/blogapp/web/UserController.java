@@ -2,20 +2,24 @@ package com.codeup.blogapp.web;
 
 import com.codeup.blogapp.data.user.User;
 import com.codeup.blogapp.data.user.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api/users", headers = "Accept=application/json",produces = "application/json")
 public class UserController {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserController(UserRepository userRepository) {
+    public UserController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping
@@ -23,11 +27,10 @@ public class UserController {
         return userRepository.findAll();
     }
 
-    @PostMapping
-    private void createUser(@RequestBody User obj){
-        System.out.println(obj.getEmail());
-        System.out.println(obj.getUsername());
-        System.out.println(obj.getPassword());
+    @PostMapping("/create")
+    private void createUser(@RequestBody User user){
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
     }
 
     @PutMapping("{id}")
@@ -51,18 +54,20 @@ public class UserController {
     }
 
     @GetMapping("/findByUsername")
-    private User findByUsername(@RequestParam String username){
+    private Optional<User> findByUsername(@RequestParam String username){
 return userRepository.findByUsername(username);
     }
 
     @GetMapping("/findByEmail")
     private User findByEmail(@RequestParam String email){
-        return userRepository.findByEmail(email);
+        return userRepository.findByEmail(email).get();
     }
 
     @PutMapping ("{id}/updatePassword")
-    private void updatePassword(@PathVariable Long id, @RequestParam(required = false) String oldPassword, @Valid @Size(min = 3) @RequestParam String newPassword
-    ){
+    private void updatePassword(@PathVariable Long id, @RequestParam(required = false) String oldPassword, @Valid @Size(min = 3) @RequestParam String newPassword){
+        //
     }
+
+
 
 }
