@@ -2,6 +2,8 @@ package com.codeup.blogapp.web;
 
 import com.codeup.blogapp.data.post.Post;
 import com.codeup.blogapp.data.post.PostsRepository;
+import com.codeup.blogapp.data.user.User;
+import com.codeup.blogapp.security.OAuthConfiguration;
 import com.codeup.blogapp.services.EmailService;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,8 +31,18 @@ public class PostsController {
         return postsRepository.findById(id).get();
     }
 
+    @GetMapping("/me")
+    private User getCurrentUser(OAuthConfiguration auth){
+        //        String email = auth.getName();
+//       return userRepository.findBYEmail(email).get();
+        return null;
+    }
     @PostMapping
-    private void createPost(@RequestBody Post newPosts) {
+    private void createPost(@RequestBody Post newPosts, OAuthConfiguration auth) {
+//        String email = auth.getName();
+//        User user = userRepository.findBYEmail(email).get();
+//        newPosts.setUser(user);
+
         System.out.println(newPosts.getTitle());
         System.out.println(newPosts.getContent());
         postsRepository.save(newPosts);
