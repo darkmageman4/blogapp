@@ -68,7 +68,6 @@ return userRepository.findByUsername(username);
 
     @PutMapping ("{id}/updatePassword")
     private void updatePassword(@PathVariable Long id, @RequestParam(required = false) String oldPassword, @Valid @Size(min = 3) @RequestParam String newPassword){
-        //
     }
 
 
