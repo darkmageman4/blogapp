@@ -22,31 +22,6 @@ export default function Register(props) {
 </body>
 </html>`;
 
-
-//    export function RegisterEvent() {
-//         document.querySelector("#register-btn").addEventListener("click", function () {
-//             let obj = {
-//                 username: document.querySelector("#username").value,
-//                 password: document.querySelector("#password").value,
-//                 email: document.querySelector("#email").value,
-//                 grant_type: 'password'
-//             }
-//
-//             let request = {
-//                 method: "POST",
-//                 headers: {"Content-Type": "application/json"},
-//                 body: `grant_type=${obj.grant_type}&username=${obj.username}&password=${obj.password}&email=${obj.email}&client_id=rest-blog-client`
-//             };
-//
-//             fetch("http://localhost:8080/api/users", request)
-//                 .then((response) => {
-//                     console.log(response.status)
-//                     createView("/");
-//                 });
-//         });
-//     }
-// }
-
     function RegisterEvent() {
         $("#register-btn").click(function () {
             let user = {

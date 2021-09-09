@@ -1,0 +1,30 @@
+POST to CALENDER.LINK
+fetch("https://calndr.link/api/events", {
+	method: "POST",
+    headers: {
+    "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+     title: "Test",
+      start: "2020-04-25 01:05",
+   end: "2020-04-26 01:05",
+         })
+}).then(response=> {
+                	response.json().then(data => {
+                		console.log(data)
+                	})
+                })
+
+
+
+        GET to CALENDER.LINK
+                fetch("https://calndr.link/api/events/{eventId}", {
+                	method: "GET",
+                    headers: {
+                    "Content-Type": "application/json"
+                    },
+                         })
+                .then(response=> {
+                response.json()
+                .then(data => {console.log(data)})
+                                })
